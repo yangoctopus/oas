@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+        
+ 
+ 
+	<!-- 实例化流程引擎配置对象 -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<!-- 注入数据库连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 正向工程 -->
+		<property name="databaseSchemaUpdate" value="true"></property>
+		<!-- 事务管理器 -->
+		<property name="transactionManager" ref="transactionManager"></property>
+		<!-- 方言 -->
+		<property name="databaseType" value="mysql"></property>
+	</bean>
+	
+	
+	<!-- 实例化spring提供的流程引擎工程对象 -->
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration"></property>
+	</bean>
+	
+	<!-- 配置Activiti的服务对象 -->
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"></bean>
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"></bean>
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"></bean>
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"></bean>
+ 
+</beans>

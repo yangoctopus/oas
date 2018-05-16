@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 	    
+	 <!-- 配置KnowLedgeTreeAction -->
+	 <package name="ktree" namespace="/" extends="json-default">
+	 	<action name="/ktreeAction_*" class="knowLedgeTreeAction"
+	 		method="{1}">
+	 		<!-- 跳转到知识管理视图 -->
+	 		<result name="ktree">
+	 			/WEB-INF/jsp/knowledge/ktree.jsp
+	 		</result>
+	 		
+	 		<!-- 响应ajax请求 -->
+	 		<result name="ktreeList" type="json">
+	 			<param name="root">ktvoList</param>
+	 		</result>	
+	 		
+	 		<!-- 响应ajax请求 -->
+	 		<result name="ktreeObj" type="json">
+	 			<param name="root">ktvoList</param>
+	 		</result>	
+	 		
+	 		
+	 	</action>
+	 </package>
+	 
+	 
+	 <!-- 配置KnowLedgeVersonAction -->
+	 <package name="kvers" namespace="/" extends="json-default">
+	 	<action name="/kversAction_*" class="knowLedgeVersonAction"
+	 		method="{1}">
+	 		<!-- 响应ajax请求 -->
+	 		<result name="kversList" type="json">
+	 			<param name="root">kvvoList</param>
+	 		</result>	
+	 			
+	 	</action>
+	 </package>
+
+    <!-- 配置CkeditorAction -->
+    <package name="ckedit" namespace="/" extends="struts-default">
+        <action name="/ckeditorAction_*" class="ckeditorAction"
+                method="{1}">
+             <result name="ckeditor" type="stream">
+                 <param name="contentType">text/html</param>
+                <param name="inputName">inputStream</param>
+            </result> 
+        </action>
+    </package>
+
+</struts>

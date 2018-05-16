@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yzy.oas.pojo">
+    <class name="Post" table="post">
+        <id name="pid" column="pid" type="java.lang.Integer">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="pname" column="pname" type="java.lang.String"></property>
+        <property name="pdesc" column="pdesc" type="java.lang.String"></property>
+
+        <!-- 建立资源和岗位的多对多关系 -->
+        <set name="mns" table="pts_mns">
+            <key column="pid"></key>
+            <many-to-many column="mid" class="Menus" ></many-to-many>
+        </set>
+
+        <!-- 建立用户和岗位的多对多关系 -->
+        <set name="ues" table="user_post">
+            <key column="pid"></key>
+            <many-to-many column="uid" class="User" ></many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

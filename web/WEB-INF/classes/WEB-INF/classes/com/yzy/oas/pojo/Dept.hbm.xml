@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.yzy.oas.pojo">
+	<!-- 
+		描述hibernate中
+		类   表
+		属性    列
+		的关系
+	 -->
+	<class name="Dept" table="t_dept">
+		<!-- id配置数据库的主键列 -->
+		<id name="did" column="did" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 其他的简单类型的属性对应的列-->
+		<property name="dname" column="dname" type="java.lang.String"></property>
+		<property name="ddesc" column="ddesc" type="java.lang.String"></property>
+		
+		<!-- 描述部门和用户的一对多关系 -->
+		<set name="urs">
+			<key column="did"></key>
+			<one-to-many class="User"/>
+		</set>
+	</class>
+</hibernate-mapping>

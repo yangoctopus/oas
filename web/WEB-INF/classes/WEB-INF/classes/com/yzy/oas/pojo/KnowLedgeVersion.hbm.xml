@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.yzy.oas.pojo">
+	<!-- 
+		描述hibernate中
+		类   表
+		属性    列
+		的关系
+	 -->
+	<class name="KnowLedgeVersion" table="t_kvers">
+		<!-- id配置数据库的主键列 -->
+		<id name="kvid" column="kvid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 其他的简单类型的属性对应的列-->
+		<property name="title" column="title" type="java.lang.String"></property>
+		<property name="content" column="content" type="java.lang.String"></property>
+		<property name="vernum" column="vernum" type="java.lang.Integer"></property>
+		<property name="verdate" column="verdate" type="java.lang.String"></property>
+		
+		 <!-- 描述知识版本和知识节点的多对一的关系 -->
+		 <many-to-one name="ktree" column="ktid"></many-to-one>
+	</class>
+</hibernate-mapping>

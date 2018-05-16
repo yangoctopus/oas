@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 
+	 
+	<!-- 配置ProcessAction -->
+	<package name="process" namespace="/" extends="mypackage">
+		<action name="/processAction_*" class="processAction" method="{1}">
+			<result name="processList">/WEB-INF/jsp/process/processList.jsp</result>
+			<result name="loadUI">/WEB-INF/jsp/process/deployProcess.jsp</result>
+			<result name="loadProcess" type="redirectAction">
+				processAction_loadProcessList.action
+			</result>
+			 
+			<result name="appUI">/WEB-INF/jsp/process/appUI.jsp</result>
+		</action>
+	
+	
+	</package>
+	
+	
+	<!-- 配置LeaveAction -->
+	<package name="leave" namespace="/" extends="mypackage">
+		<action name="/leaveAction_*" class="leaveAction" method="{1}">
+			
+		</action>
+	
+	
+	</package>
+	
+	<!-- 配置TaskAction -->
+	<package name="task" namespace="/" extends="mypackage">
+		<action name="/taskAction_*" class="taskAction" method="{1}">
+			<result name="taskList">/WEB-INF/system/taskList.jsp</result>
+			<result name="taskComp">/WEB-INF/system/taskComp.jsp</result>
+			<result name="loadTaskList" type="redirectAction">
+				taskAction_loadTaskList.action
+			</result>
+		</action>
+	
+	
+	</package>
+</struts>

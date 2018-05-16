@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yzy.oas.pojo">
+    <class name="Menus" table="menus">
+        <id name="mid" column="mid" type="java.lang.Integer">
+            <generator class="assigned"></generator>
+        </id>
+        <property name="pid" column="pid" type="java.lang.Integer"></property>
+        <property name="mname" column="mname" type="java.lang.String"></property>
+        <property name="url" column="url" type="java.lang.String"></property>
+        <property name="isParent" column="isparent" type="java.lang.Integer"></property>
+        <property name="open" column="open" type="java.lang.Integer"></property>
+        <property name="target" column="target" type="java.lang.String"></property>
+        <property name="icon" column="icon" type="java.lang.String"></property>
+
+        <!-- 建立资源和岗位的多对多关系 -->
+        <set name="pts" table="pts_mns">
+            <key column="mid"></key>
+            <many-to-many column="pid" class="Post" ></many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

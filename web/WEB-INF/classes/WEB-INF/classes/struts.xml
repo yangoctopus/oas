@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 
+	 
+	 <!-- 模块配置文件的导入 -->
+	 <include file="system.xml"></include>
+    <include file="knowledge.xml"></include>
+    <include file="process.xml"></include>
+
+    <package name="mypackage" extends="json-default">
+        <interceptors>
+            <!-- 注册自定义拦截器 -->
+            <interceptor name="myInter" class="com.yzy.oas.utils.MyInterceptor"></interceptor>
+            <!-- 自定义拦截器栈 -->
+            <interceptor-stack name="mystack">
+                <!-- 引用系统的拦截器 -->
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <!-- 引用自定义的拦截器 -->
+                <interceptor-ref name="myInter"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <!-- 使用自定义拦截器栈 -->
+        <default-interceptor-ref name="mystack"></default-interceptor-ref>
+        <global-results>
+            <result name="login" type="redirect">
+                /login.jsp
+            </result>
+        </global-results>
+    </package>
+</struts>

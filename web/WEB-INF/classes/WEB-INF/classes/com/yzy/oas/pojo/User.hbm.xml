@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.yzy.oas.pojo">
+	<!-- 
+		描述hibernate中
+		类   表
+		属性    列
+		的关系
+	 -->
+	<class name="User" table="user">
+		<!-- id配置数据库的主键列 -->
+		<id name="uid" column="uid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<!-- 其他的简单类型的属性对应的列-->
+		<property name="username" column="username" type="java.lang.String"></property>
+		<property name="password" column="password" type="java.lang.String"></property>
+		<property name="sex" column="sex" type="java.lang.String"></property>
+		<property name="phone" column="phone" type="java.lang.String"></property>
+		<property name="email" column="email" type="java.lang.String"></property>
+		
+		
+		
+		<!-- 描述用户和部门的多对一关系 -->
+		<many-to-one name="dept" class="Dept" column="did"></many-to-one>
+		
+		<!-- 描述用户和岗位的多对多关系 -->
+		<set name="psts" table="user_post">
+			<key column="uid"></key>
+			<many-to-many class="Post" column="pid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

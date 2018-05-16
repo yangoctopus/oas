@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 
+	 
+	<!-- 配置岗位Action -->
+	<package name="main" namespace="/" extends="struts-default">
+		<action name="/mainAction_*" class="mainAction" method="{1}">
+			<!-- 跳转到岗位列表页面 -->
+			<result name="index">WEB-INF/jsp/main/index.jsp</result>
+            <result name="bottom">WEB-INF/jsp/main/bottom.jsp</result>
+            <result name="left">WEB-INF/jsp/main/left.jsp</result>
+            <result name="right">WEB-INF/jsp/main/right.jsp</result>
+            <result name="top">WEB-INF/jsp/main/top.jsp</result>
+		</action>
+	
+	</package>
+
+    <!-- 配置MenusAction -->
+    <package name="menus" namespace="/" extends="json-default">
+        <action name="/menusAction_*" class="menusAction" method="{1}">
+            <!-- 打开授权窗口 -->
+            <result name="privilegeUI">/WEB-INF/jsp/post/privilege.jsp</result>
+            <!-- 响应所有资源对应的json数组 -->
+            <result name="loadMenus" type="json">
+                <param name="root">mvoList</param>
+            </result>
+        </action>
+    </package>
+
+    <!-- 配置岗位Action -->
+    <package name="post" namespace="/" extends="json-default">
+        <action name="/postAction_*" class="postAction" method="{1}">
+        <!-- 跳转到岗位列表页面 -->
+        <result name="postList">/WEB-INF/jsp/post/postList.jsp</result>
+            <result name="addPost">/WEB-INF/jsp/post/addPost.jsp</result>
+            <result name="updatePost">/WEB-INF/jsp/post/updatePost.jsp</result>
+
+            <result name="loadPostList" type="chain">postAction_loadPostList</result>
+        <!-- 响应授权的异步请求 -->
+        <result name="ajaxResp" type="stream">
+            <param name="inputName">inputStream</param>
+        </result>
+            <!-- 响应所有资源对应的json数组 -->
+            <result name="postMenus" type="json">
+                <param name="root">pmlist</param>
+            </result>
+    </action>
+    </package>
+
+    <!-- 配置部门Action -->
+    <package name="dept" namespace="/" extends="struts-default">
+        <action name="/deptAction_*" class="deptAction" method="{1}">
+
+            <result name="deptList">/WEB-INF/jsp/dept/deptList.jsp</result>
+            <result name="deptUI">/WEB-INF/jsp/dept/addDept.jsp</result>
+            <result name="del" type="chain">deptAction_loadDeptList</result>
+            <result name="add" type="chain">deptAction_loadDeptList</result>
+            <result name="toUpdateDept" >/WEB-INF/jsp/dept/updateDept.jsp</result>
+        </action>
+    </package>
+
+    <!-- 配置部门Action -->
+    <package name="user" namespace="/" extends="struts-default">
+        <action name="/userAction_*" class="userAction" method="{1}">
+
+            <result name="uvolist">/WEB-INF/jsp/user/userList.jsp</result>
+            <result name="userUI">/WEB-INF/jsp/user/addUser.jsp</result>
+            <result name="delUser" type="chain">userAction_loadUserList</result>
+            <result name="updateUserUI">/WEB-INF/jsp/user/updateUser.jsp</result>
+            <!-- 登录成功跳转 -->
+            <result name="loadMain" type="redirectAction">
+                <!-- <param name="namespace">/xxx</param>
+                <param name="actionName">mainAction_loadMain.action</param> -->
+                mainAction_loadIndex.action
+            </result>
+        </action>
+    </package>
+</struts>
